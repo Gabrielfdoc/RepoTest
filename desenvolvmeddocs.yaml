@@ -1,0 +1,894 @@
+openapi: 3.0.0
+paths:
+  /postagem:
+    get:
+      operationId: PostagemController_findAll
+      parameters: []
+      responses:
+        '200':
+          description: Os recursos foram retornados com sucesso!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPostagemResponse'
+      tags: &ref_0
+        - Postagem
+    post:
+      operationId: PostagemController_create
+      parameters: []
+      requestBody:
+        required: true
+        description: Deve conter todos os dados requisitados no Postagem
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Postagem'
+      responses:
+        '201':
+          description: Criado com sucesso!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostagemResponse'
+        '400':
+          description: Bad Request
+      tags: *ref_0
+    put:
+      operationId: PostagemController_update
+      parameters: []
+      requestBody:
+        required: true
+        description: >-
+          Deve conter todos os dados requisitados no Postagem e apresentar um ID
+          existente no banco de dados.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostagemResponse'
+      responses:
+        '200':
+          description: Recurso atualizado com sucesso!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostagemResponse'
+        '404':
+          description: Recurso não encontrado!
+      tags: *ref_0
+  /postagem/{id}:
+    get:
+      operationId: PostagemController_findById
+      parameters:
+        - name: id
+          required: true
+          in: path
+          description: Tem de ser o ID de uma postagem existente no banco de dados!
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Os recursos foram retornados com sucesso!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPostagemResponse'
+        '404':
+          description: Recurso não encontrado!
+      tags: *ref_0
+    delete:
+      operationId: PostagemController_delete
+      parameters:
+        - name: id
+          required: true
+          in: path
+          description: Tem de ser o ID de uma postagem existente no banco de dados!
+          schema:
+            type: number
+      responses:
+        '204':
+          description: Deletado com sucesso!
+        '404':
+          description: Recurso não encontrado!
+      tags: *ref_0
+  /postagem/busca/{titulo}:
+    get:
+      operationId: PostagemController_findByTitle
+      parameters:
+        - name: titulo
+          required: true
+          in: path
+          description: Tem de ser o título de uma postagem existente no banco de dados!
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Os recursos foram retornados com sucesso!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPostagemResponse'
+        '404':
+          description: Recurso não encontrado!
+      tags: *ref_0
+  /cadastro/medico:
+    post:
+      operationId: CadastroController_createMedico
+      parameters: []
+      requestBody:
+        required: true
+        description: Deve conter todos os dados requisitados no CadastroTemporarioMedicoDTO
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CadastroTemporarioMedicoDTO'
+      responses:
+        '201':
+          description: Criado com sucesso!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CadastroTemporarioMedicoDTOResponse'
+        '400':
+          description: Bad Request
+        '422':
+          description: Unprocessable Entity
+      tags: &ref_1
+        - Cadastro
+    put:
+      operationId: CadastroController_updateMedico
+      parameters: []
+      requestBody:
+        required: true
+        description: >-
+          Deve conter todos os dados requisitados no CadastroTemporarioMedicoDTOResponse
+          e não é possível alterar o CRM
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CadastroTemporarioMedicoDTOResponse'
+      responses:
+        '200':
+          description: O recurso foi atualizado com sucesso!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CadastroTemporarioMedicoDTOResponse'
+        '400':
+          description: Bad Request
+        '404':
+          description: Recurso não encontrado!
+        '422':
+          description: Unprocessable Entity
+      tags: *ref_1
+  /cadastro/paciente:
+    post:
+      operationId: CadastroController_createPaciente
+      parameters: []
+      requestBody:
+        required: true
+        description: >-
+          Deve conter todos os dados requisitados no
+          CadastroTemporarioPacienteDTO
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CadastroTemporarioPacienteDTO'
+      responses:
+        '201':
+          description: Criado com sucesso!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CadastroTemporarioPacienteDTOResponse'
+        '400':
+          description: Bad Request
+        '422':
+          description: Unprocessable Entity
+      tags: *ref_1
+    put:
+      operationId: CadastroController_updatePaciente
+      parameters: []
+      requestBody:
+        required: true
+        description: >-
+          Deve conter todos os dados requisitados no
+          CadastroTemporarioPacienteDTOResponse
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CadastroTemporarioPacienteDTOResponse'
+      responses:
+        '200':
+          description: O recurso foi atualizado com sucesso!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CadastroTemporarioPacienteDTOResponse'
+        '400':
+          description: Bad Request
+        '404':
+          description: Recurso não encontrado!
+        '422':
+          description: Unprocessable Entity
+      tags: *ref_1
+  /cadastro/{id}:
+    delete:
+      operationId: CadastroController_delete
+      parameters:
+        - name: id
+          required: true
+          in: path
+          description: Tem de ser o ID de um cadastro existente no banco de dados!
+          schema:
+            type: number
+      responses:
+        '204':
+          description: O recurso foi deletado com sucesso!
+        '404':
+          description: Recurso não encontrado!
+      tags: *ref_1
+  /cadastro:
+    get:
+      operationId: CadastroController_findAll
+      parameters: []
+      responses:
+        '200':
+          description: Os recursos foram retornados com sucesso!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cadastro'
+      tags: *ref_1
+  /medico:
+    get:
+      operationId: MedicoController_findAll
+      parameters: []
+      responses:
+        '200':
+          description: Os recursos foram retornados com sucesso!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Medico'
+      tags: &ref_2
+        - Medico
+  /medico/{id}:
+    get:
+      operationId: MedicoController_findById
+      parameters:
+        - name: id
+          required: true
+          in: path
+          description: Tem de ser o ID de um médico existente no banco de dados!
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Os recursos foram retornados com sucesso!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Medico'
+        '404':
+          description: Recurso não encontrado!
+      tags: *ref_2
+  /tema:
+    get:
+      operationId: TemaController_findAll
+      parameters: []
+      responses:
+        '200':
+          description: Os recursos foram retornados com sucesso!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTemaResponse'
+      tags: &ref_3
+        - Tema
+    post:
+      operationId: TemaController_create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tema'
+      responses:
+        '201':
+          description: Criado com sucesso!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemaResponse'
+        '400':
+          description: Bad Request
+      tags: *ref_3
+    put:
+      operationId: TemaController_update
+      parameters: []
+      requestBody:
+        required: true
+        description: >-
+          Deve conter todos os dados requisitados no Tema e apresentar o ID de
+          um tema existente no banco de dados.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TemaResponse'
+      responses:
+        '200':
+          description: O recurso foi atualizado com sucesso!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemaResponse'
+        '404':
+          description: Recurso não encontrado!
+      tags: *ref_3
+  /tema/{id}:
+    get:
+      operationId: TemaController_findById
+      parameters:
+        - name: id
+          required: true
+          in: path
+          description: Tem de ser o ID de um tema existente no banco de dados!
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Os recursos foram retornados com sucesso!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTemaResponse'
+        '404':
+          description: Recurso não encontrado!
+      tags: *ref_3
+    delete:
+      operationId: TemaController_delete
+      parameters:
+        - name: id
+          required: true
+          in: path
+          description: Tem de ser o ID de um tema existente no banco de dados!
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Recurso atualizado com sucesso!
+        '204':
+          description: O recurso foi deletado com sucesso!
+        '404':
+          description: Recurso não encontrado!
+      tags: *ref_3
+  /paciente:
+    get:
+      operationId: PacienteController_findAll
+      parameters: []
+      responses:
+        '200':
+          description: Os recursos foram retornados com sucesso!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPacienteResponse'
+      tags: &ref_4
+        - Paciente
+  /paciente/{id}:
+    get:
+      operationId: PacienteController_findById
+      parameters:
+        - name: id
+          required: true
+          in: path
+          description: Tem de ser o ID de um paciente existente no banco de dados!
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Os recursos foram retornados com sucesso!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPacienteResponse'
+        '404':
+          description: Recurso não encontrado!
+      tags: *ref_4
+  /comentario:
+    get:
+      operationId: ComentarioController_findAll
+      parameters: []
+      responses:
+        '200':
+          description: Os recursos foram retornados com sucesso!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetComentarioResponse'
+      tags: &ref_5
+        - Comentario
+    post:
+      operationId: ComentarioController_create
+      parameters: []
+      requestBody:
+        required: true
+        description: Deve conter todos os dados requisitados em um Comentario
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comentario'
+      responses:
+        '201':
+          description: Criado com sucesso!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComentarioResponse'
+        '400':
+          description: Bad Request
+      tags: *ref_5
+    put:
+      operationId: ComentarioController_update
+      parameters: []
+      requestBody:
+        required: true
+        description: >-
+          Deve conter todos os dados requisitados em um Comentario e apresentar
+          o ID de um comentário existente no banco de dados
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ComentarioResponse'
+      responses:
+        '200':
+          description: O recurso foi atualizado com sucesso!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComentarioResponse'
+        '404':
+          description: Recurso não encontrado!
+      tags: *ref_5
+  /comentario/{id}:
+    get:
+      operationId: ComentarioController_findById
+      parameters:
+        - name: id
+          required: true
+          in: path
+          description: Tem de ser o ID de um comentário existente no banco de dados!
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Os recursos foram retornados com sucesso!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetComentarioResponse'
+        '404':
+          description: Recurso não encontrado!
+      tags: *ref_5
+    delete:
+      operationId: ComentarioController_delete
+      parameters:
+        - name: id
+          required: true
+          in: path
+          description: Tem de ser o ID de um comentário existente no banco de dados!
+          schema:
+            type: number
+      responses:
+        '204':
+          description: O recurso foi deletado com sucesso!
+        '404':
+          description: Recurso não encontrado!
+      tags: *ref_5
+info:
+  title: DesenvolvMed
+  description: Backend para o aplicativo DesenvolvMed
+  version: '1.1'
+  contact: {}
+tags: []
+servers: []
+components:
+  schemas:
+    Cadastro:
+      type: object
+      properties:
+        id:
+          type: number
+        cpf:
+          type: string
+          description: >-
+            Precisa de ter exatamente 11 números e seguir a expressão regular
+            /^[0-9]+$/
+        nome:
+          type: string
+        sobrenome:
+          type: string
+        senha:
+          type: string
+          description: Precisa de ter no mínimo 4 caracteres e no máximo 255
+        email:
+          type: string
+          description: Precisa de conter @ e ter no máximo 255 caracteres.
+        comentarios:
+          $ref: '#/components/schemas/Comentario'
+      required:
+        - id
+        - cpf
+        - nome
+        - sobrenome
+        - senha
+        - email
+        - comentarios
+    CadastroGet:
+      type: object
+      properties:
+        id:
+          type: number
+        cpf:
+          type: string
+          description: >-
+            Precisa de ter exatamente 11 números e seguir a expressão regular
+            /^[0-9]+$/
+        nome:
+          type: string
+        sobrenome:
+          type: string
+        senha:
+          type: string
+          description: Precisa de ter no mínimo 4 caracteres e no máximo 255
+        email:
+          type: string
+          description: Precisa de conter @ e ter no máximo 255 caracteres.
+      required:
+        - id
+        - cpf
+        - nome
+        - sobrenome
+        - senha
+        - email
+        - comentarios
+    Medico:
+      type: object
+      properties:
+        id:
+          type: number
+        crm:
+          type: string
+          description: Precisa de conter exatamente 13 caracteres
+        cadastro:
+          $ref: '#/components/schemas/CadastroGet'
+        postagens:
+          $ref: '#/components/schemas/GetPostagemRef'
+      required:
+        - id
+        - crm
+        - postagens
+        - cadastro
+    Postagem:
+      type: object
+      properties:
+        titulo:
+          type: string
+          description: Pode conter no máximo 500 caracteres
+        descricao:
+          type: string
+          description: Pode conter entre 20 e 5000 caracteres
+        anexo:
+          type: string
+          description: Pode conter entre 10 e 500 caracteres, porém é opcional
+        dataPostagem:
+          format: date-time
+          type: string
+        tema:
+          type: number
+          description: Deverá ser o ID de um tema existente no banco de dados
+        medico:
+          type: number
+          description: Deverá ser o ID de um médico existente no banco de dados
+      required:
+        - id
+        - titulo
+        - descricao
+        - anexo
+        - dataPostagem
+        - tema
+        - medico
+        - comentarios
+    PostagemResponse:
+      type: object
+      properties:
+        titulo:
+          type: string
+          description: Pode conter entre 5 e 500 caracteres
+        descricao:
+          type: string
+          description: Pode conter entre 20 e 5000 caracteres
+        anexo:
+          type: string
+          description: Pode conter entre 10 e 500 caracteres, porém é opcional
+        dataPostagem:
+          format: date-time
+          type: string
+        tema:
+          type: number
+          description: Deverá ser o ID de um tema existente no banco de dados
+        medico:
+          type: number
+          description: Deverá ser o ID de um médico existente no banco de dados
+        id:
+          type: number
+      required:
+        - id
+        - titulo
+        - descricao
+        - anexo
+        - dataPostagem
+        - tema
+        - medico
+        - comentarios
+    GetPostagemResponse:
+      type: object
+      properties:
+        id: 
+          type: number
+        titulo: 
+          type: string
+        descricao: 
+          type: string
+        anexo: 
+          type: string
+        dataPostagem: 
+          format: date-time
+          type: string
+        tema:
+          $ref: '#/components/schemas/TemaResponse'
+    Comentario:
+      type: object
+      properties:
+        conteudo:
+          type: string
+          description: Precisa de conter entre 10 e 300 caracteres.
+        dataComentario:
+          format: date-time
+          type: string
+        postagem:
+          type: number
+          description: Precisa de ser o ID de uma postagem existente no banco de dados!
+        cadastro:
+          type: number
+          description: Precisa de ser o ID de um cadastro geral existente no banco de dados!
+      required:
+        - id
+        - conteudo
+        - dataComentario
+        - postagem
+        - cadastro
+    ComentarioResponse:
+      type: object
+      properties:
+        id:
+          type: number
+        conteudo:
+          type: string
+          description: Precisa de conter entre 10 e 300 caracteres.
+        dataComentario:
+          format: date-time
+          type: string
+        postagem:
+          type: number
+          description: Precisa de ser o ID de uma postagem existente no banco de dados!
+        cadastro:
+          type: number
+          description: Precisa de ser o ID de um cadastro geral existente no banco de dados!
+      required:
+        - id
+        - conteudo
+        - dataComentario
+        - postagem
+        - cadastro
+    GetComentarioResponse:
+      type: object
+      properties:
+        id: 
+          type: number
+        conteudo: 
+          type: string
+        dataComentario:
+          format: date-time
+          type: string
+        postagem:
+          $ref: '#/components/schemas/GetPostagemRef'
+    GetPostagemRef:
+      type: object
+      properties:
+        id: 
+          type: number
+        titulo: 
+          type: string
+        descricao:
+          type: string
+        anexo: 
+          type: string
+        dataPostagem:
+          format: date-time
+          type: string
+    CadastroTemporarioMedicoDTO:
+      type: object
+      properties:
+        cpf:
+          type: string
+          description: >-
+            Precisa de ter exatamente 11 números e seguir a expressão regular
+            /^[0-9]+$/
+        nome:
+          type: string
+        sobrenome:
+          type: string
+        senha:
+          type: string
+          description: Precisa de ter no mínimo 4 caracteres e no máximo 255
+        email:
+          type: string
+          description: Precisa de conter @ e ter no máximo 255 caracteres.
+        crm:
+          type: string
+          description: Precisa de conter exatamente 13 caracteres
+      required:
+        - id
+        - cpf
+        - nome
+        - sobrenome
+        - senha
+        - email
+        - crm
+    CadastroTemporarioMedicoDTOResponse:
+      type: object
+      properties:
+        id:
+          type: number
+        cpf:
+          type: string
+          description: >-
+            Precisa de ter exatamente 11 números e seguir a expressão regular
+            /^[0-9]+$/
+        nome:
+          type: string
+        sobrenome:
+          type: string
+        senha:
+          type: string
+          description: Precisa de ter no mínimo 4 caracteres e no máximo 255
+        email:
+          type: string
+          description: Precisa de conter @ e ter no máximo 255 caracteres.
+        crm:
+          type: string
+          description: Precisa de conter exatamente 13 caracteres
+      required:
+        - id
+        - cpf
+        - nome
+        - sobrenome
+        - senha
+        - email
+        - crm
+    CadastroTemporarioPacienteDTO:
+      type: object
+      properties:
+        cpf:
+          type: string
+          description: >-
+            Precisa de ter exatamente 11 números e seguir a expressão regular
+            /^[0-9]+$/
+        nome:
+          type: string
+        sobrenome:
+          type: string
+        senha:
+          type: string
+          description: Precisa de ter no mínimo 4 caracteres e no máximo 255
+        email:
+          type: string
+          description: Precisa de conter @ e ter no máximo 255 caracteres.
+        convenio:
+          type: string
+          description: Essa é uma propriedade opcional.
+      required:
+        - id
+        - cpf
+        - nome
+        - sobrenome
+        - senha
+        - email
+    CadastroTemporarioPacienteDTOResponse:
+      type: object
+      properties:
+        id:
+          type: number
+        cpf:
+          type: string
+          description: >-
+            Precisa de ter exatamente 11 números e seguir a expressão regular
+            /^[0-9]+$/
+        nome:
+          type: string
+        sobrenome:
+          type: string
+        senha:
+          type: string
+          description: Precisa de ter no mínimo 4 caracteres e no máximo 255
+        email:
+          type: string
+          description: Precisa de conter @ e ter no máximo 255 caracteres.
+        convenio:
+          type: string
+          description: Essa é uma propriedade opcional.
+      required:
+        - id
+        - cpf
+        - nome
+        - sobrenome
+        - senha
+        - email
+    GetPacienteResponse:
+      type: object
+      properties:
+        id: 
+          type: number
+        convenio: 
+          type: string
+        cadastro:
+          $ref: '#/components/schemas/GetCadastroRef'
+    GetCadastroRef:
+      type: object
+      properties:
+        id: 
+          type: number
+        cpf: 
+          type: string
+        nome:
+          type: string
+        sobrenome:
+          type: string
+        senha:
+          type: string
+        email:
+          type: string
+    Tema:
+      type: object
+      properties:
+        tema:
+          type: string
+          description: Pode conter no máximo 255 caracteres.
+      required:
+        - id
+        - tema
+        - postagens
+    TemaResponse:
+      type: object
+      properties:
+        id:
+          type: number
+        tema:
+          type: string
+          description: Pode conter no máximo 255 caracteres.
+    GetTemaResponse:
+      type: object
+      properties:
+        id:
+          type: number
+        tema:
+          type: string
+          description: Pode conter no máximo 255 caracteres.
+        postagens:
+          $ref: '#/components/schemas/GetPostagemRef'
+      required:
+        - id
+        - tema
+        - postagens
